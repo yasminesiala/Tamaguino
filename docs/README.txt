@@ -1,4 +1,4 @@
-🐣 Tamaguino — Modified Arduino Tamagotchi Clone
+#🐣 Tamaguino — Modified Arduino Tamagotchi Clone
 
 This project is my custom, expanded, and personalized version of the original Tamaguino digital pet created by Alojz Jakob. His project includes the full game logic, UI, and animations.
 
@@ -8,7 +8,7 @@ My repo contains personal modifications and additions.
 
 My version rebuilds the hardware using an Arduino Nano, adds a few new features, cleans up parts of the code, and includes my own custom 3D-printed Tamagotchi-style enclosure (basically the Tamagotchi I never had growing up).
 
-What I Changed / Added
+##What I Changed / Added
 	Hardware Changes
 		- Switched from Arduino Pro Mini → Arduino Nano (more memory + easier USB programming).
 		- Using the internal pull-up resistor version
@@ -28,7 +28,7 @@ What I Changed / Added
 				More animations
 				Sound upgrades
 
-Parts I Used: 
+##Parts I Used: 
 	- 0.96" I2C OLED Display (128×64)
 	- 3× momentary push buttons
 	- Small speaker
@@ -39,7 +39,7 @@ Parts I Used:
 	- 7×5 cm prototyping PCB
 	- Wires
 
-Wiring Summary: 
+##Wiring Summary: 
 	OLED
 		VCC -> 5V
 		GND -> GND
@@ -52,9 +52,10 @@ Wiring Summary:
 		10k resistor -> A0 -> GND
 	Speaker -> digital pin & GND
 
-Code Files in This Repo: 
+##Code Files in This Repo: 
 	Tamaguino.ino — original version using external resistors.
 	tamaguino-noInputResistor.ino — my modified version using internal pull-ups (the one I used).
 	config.yml — configuration file from the original project.
 	docs/ — original documentation.
 	images/ — UI + sprite assets and original images.
+
