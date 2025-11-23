@@ -1,12 +1,3 @@
-/* Tamaguino
- by Alojz Jakob <http://jakobdesign.com>
-
- ********** TAMAGUINO ***********
- * Tamagotchi clone for Arduino *
- ********************************
- 
-*/
-
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -25,7 +16,12 @@ int button1State = 0;
 int button2State = 0;
 int button3State = 0;
 
+const int lightSensorPin = A0;
+const int sleepThreshold = 200;
 
+bool isSleeping = false;
+bool isSick = false;
+unsigned long lastSicknessCheck = 0;
 
 // splash 48x26
 const unsigned char splash1 [] PROGMEM = {
@@ -435,8 +431,7 @@ void setup() {
 
   // splash
   display.setTextColor(WHITE);
-  //display.println(F("jakobdesign presents")); 
-  display.print(F(" jakobdesign presents")); 
+  display.print(F(" yasmine presents")); 
   display.drawBitmap(15, 24, splash1 , 48, 26, WHITE);
   display.drawBitmap(48, 24, splash2 , 80, 40, WHITE);
   display.display();
@@ -471,7 +466,6 @@ void loop() {
   
   if(!dead){
     /* -------- MODIFY PET STATS -------- */
-    // TODO: different gradients regarding to age
     if(sleeping){
       hunger-=0.00005;
       poopometer+=0.00005;
@@ -1304,10 +1298,42 @@ void loop() {
 }
 
 
+//play a happy beep when fed 
+void playHappyBeep() {
+  tone(sound, 1000, 200);
+  delay(250);
+  tone(sound, 12000, 200);
+  delay(250);
+  noTone(sound);
+}
 
+//randomly makes tamaguino sick
+void checkRandomSickness() {
+  if (millis() - lastSicknessCheck > 200000) {
+    lastSicknessCheck = millis();
+    if (random(0, 100) < 7) { //7% chance of illness!
+      isSick = true;
+      display.clearDisplay();
+      display.setCursor(0,0);
+      display.print("Oh no! Illness!!");
+      display.display();
+    }
+  }
+}
 
-
-
+//makes tama sleep 
+void updateSleepState() {
+  int lightLevel = analogRead(lightSensorPin);
+  if (lightLevel < sleepThreshold) {
+    isSleeping = true;
+    display.clearDisplay();
+    display.setCursor(0, 0);
+    display.print("Sleeping...");
+    display.display();
+  } else {
+    isSleeping = false;
+  }
+}
 
 
 
