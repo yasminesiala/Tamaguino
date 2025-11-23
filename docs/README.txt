@@ -1,35 +1,60 @@
-Hyperspace by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+🐣 Tamaguino — Modified Arduino Tamagotchi Clone
 
+This project is my custom, expanded, and personalized version of the original Tamaguino digital pet created by Alojz Jakob. His project includes the full game logic, UI, and animations.
 
-So I've had the wireframe for this particular design kicking around for some time, but with all
-the other interesting (and in some cases, semi-secret) projects I've been working on it took me
-a little while to get to actually designing and coding it. Fortunately, things have eased up
-enough for me to finaly get around to it, so I'm happy to introduce Hyperspace: a fun, blocky,
-one-page design with a lot of color, a bit of animation, and an additional "generic" page template
-(because hey, even one-page sites usually need an interior page or two). Hope you dig it :)
+Original project: https://alojzjakob.github.io/Tamaguino/
+All core logic, art, animations, and design belong to their respective creators.
+My repo contains personal modifications and additions.
 
-Demo images* courtesy of Unsplash, a radtastic collection of CC0 (public domain) images
-you can use for pretty much whatever.
+My version rebuilds the hardware using an Arduino Nano, adds a few new features, cleans up parts of the code, and includes my own custom 3D-printed Tamagotchi-style enclosure (basically the Tamagotchi I never had growing up).
 
-(* = not included)
+What I Changed / Added
+	Hardware Changes
+		- Switched from Arduino Pro Mini → Arduino Nano (more memory + easier USB programming).
+		- Using the internal pull-up resistor version
+		- Cleaned up wiring for the OLED display and buttons
+		- Added a speaker for simple sound effects
+		- Added a light sensor (LDR + resistor) for potential brightness-based behavior or “sleep mode.”
+		- Designed and 3D-printed my own enclosure inspired by classic Tamagotchis.
+	Software Changes
+		- Added a mood system (happy / neutral / sad) with matching animations
+		- Added a startup splash screen
+		- Improved button responsiveness on the Nano
+		- Cleaned up portions of the code structure 
+		- Minor adjustments to OLED layout for clearer text spacing.
+		- Added placeholders for future features:
+				EEPROM save/load
+				Mini-games
+				More animations
+				Sound upgrades
 
-AJ
-aj@lkn.io | @ajlkn
+Parts I Used: 
+	- 0.96" I2C OLED Display (128×64)
+	- 3× momentary push buttons
+	- Small speaker
+	- Slide switch
+	- 150mAh LiPo battery
+	- LiPo charging board
+	- 10k resistor
+	- 7×5 cm prototyping PCB
+	- Wires
 
+Wiring Summary: 
+	OLED
+		VCC -> 5V
+		GND -> GND
+		SDA -> A4
+		SCL -> A5
+	Buttons -> digital pins
+	Light Sensor
+		LDR -> A0
+		LDR -> 5V
+		10k resistor -> A0 -> GND
+	Speaker -> digital pin & GND
 
-Credits:
-
-	Demo Images:
-		Unsplash (unsplash.com)
-
-	Icons:
-		Font Awesome (fortawesome.github.com/Font-Awesome)
-
-	Other:
-		jQuery (jquery.com)
-		html5shiv.js (@afarkas @jdalton @jon_neal @rem)
-		Misc. Sass functions (@HugoGiraudel)
-		Respond.js (j.mp/respondjs)
-		Skel (skel.io)
+Code Files in This Repo: 
+	Tamaguino.ino — original version using external resistors.
+	tamaguino-noInputResistor.ino — my modified version using internal pull-ups (the one I used).
+	config.yml — configuration file from the original project.
+	docs/ — original documentation.
+	images/ — UI + sprite assets and original images.
